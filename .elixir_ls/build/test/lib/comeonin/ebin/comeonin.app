@@ -7,4 +7,4 @@
                         'Elixir.Comeonin.PasswordHash',
                         'Elixir.Comeonin.Pbkdf2']},
               {registered,[]},
-              {vsn,"5.1.3"}]}.
+              {vsn,"5.3.1"}]}.

@@ -5,4 +5,4 @@
                         'Elixir.Pbkdf2.Base64','Elixir.Pbkdf2.Stats',
                         'Elixir.Pbkdf2.Tools']},
               {registered,[]},
-              {vsn,"1.0.2"}]}.
+              {vsn,"1.2.1"}]}.
