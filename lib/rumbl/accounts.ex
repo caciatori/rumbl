@@ -4,6 +4,7 @@ defmodule Rumbl.Accounts do
   """
   alias Rumbl.Repo
   alias Rumbl.Accounts.User
+  alias Pbkdf2
 
   def get_user(id) do
     Repo.get(User, id)
@@ -39,5 +40,22 @@ defmodule Rumbl.Accounts do
     %User{}
     |> User.registration_changeset(attrs)
     |> Repo.insert()
+  end
+
+  @spec authenticate(String.t(), String.t()) :: {:ok, %User{}} | {:error, :unauthorized} | {:error, :not_found}
+  def authenticate(username, password) do
+    user = get_user_by(username: username)
+
+    cond do
+      user && Pbkdf2.verify_pass(password, user.password_hash) ->
+        {:ok, user}
+
+      user ->
+        {:error, :unauthorized}
+
+      true ->
+        Pbkdf2.no_user_verify()
+        {:error, :not_found}
+    end
   end
 end
